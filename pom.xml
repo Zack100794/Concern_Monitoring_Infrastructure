@@ -216,6 +216,67 @@
         </execution>
       </executions>
     </plugin>
+    
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-shade-plugin</artifactId>
+      <version>3.5.1</version>
+      <executions>
+        <!-- Encrypted Probe JAR -->
+        <execution>
+          <id>encrypted-probe</id>
+          <phase>package</phase>
+          <goals>
+            <goal>shade</goal>
+          </goals>
+          <configuration>
+            <finalName>encrypted-probe</finalName>
+            <transformers>
+              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <mainClass>it.cnr.isti.labsedc.concern.probe.ConcernEncryptedProbe</mainClass>
+              </transformer>
+            </transformers>
+            <filters>
+              <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                  <exclude>META-INF/*.SF</exclude>
+                  <exclude>META-INF/*.DSA</exclude>
+                  <exclude>META-INF/*.RSA</exclude>
+                </excludes>
+              </filter>
+            </filters>
+          </configuration>
+        </execution>
+        
+        <!-- Unencrypted Probe JAR -->
+        <execution>
+          <id>unencrypted-probe</id>
+          <phase>package</phase>
+          <goals>
+            <goal>shade</goal>
+          </goals>
+          <configuration>
+            <finalName>unencrypted-probe</finalName>
+            <transformers>
+              <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                <mainClass>it.cnr.isti.labsedc.concern.probe.ConcernUnencryptedProbe</mainClass>
+              </transformer>
+            </transformers>
+            <filters>
+              <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                  <exclude>META-INF/*.SF</exclude>
+                  <exclude>META-INF/*.DSA</exclude>
+                  <exclude>META-INF/*.RSA</exclude>
+                </excludes>
+              </filter>
+            </filters>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
 		</plugins>
 	</build>
 	<properties>
