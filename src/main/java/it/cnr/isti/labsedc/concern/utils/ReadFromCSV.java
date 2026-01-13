@@ -38,8 +38,7 @@ public class ReadFromCSV implements Iterator<String>, AutoCloseable {
 
         advance();
         } catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Failed to initialize CSV reader for file: " + csvFile, e);
 		}
     }
 
@@ -56,8 +55,7 @@ public class ReadFromCSV implements Iterator<String>, AutoCloseable {
 			    }
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Error reading CSV file", e);
 		}
     }
 
@@ -81,19 +79,7 @@ public class ReadFromCSV implements Iterator<String>, AutoCloseable {
         try {
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Error closing CSV file", e);
 		}
-    }
-    
-    public static void main(String[] args) {
-        try (ReadFromCSV reader =
-                 new ReadFromCSV("/home/acalabro/Desktop/Dataset/GNB_MacScheduler_ordinato.csv", "ULSCH_Round_1")) {
-
-            while (reader.hasNext()) {
-                String value = reader.next();
-                System.out.println(value);
-            }
-        }
     }
 }

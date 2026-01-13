@@ -57,6 +57,10 @@ This will:
 
 The encrypted probe uses AES encryption with a predefined key. The encryption key is defined in the `Encrypter` class and is the same key used by the monitoring system for decryption.
 
+**Security Note**: The encryption key is currently hardcoded in the source code (`Encrypter.java`). For production use, consider externalizing the key to a configuration file or environment variable.
+
+Default key (Base64): `k3n8JZV5f0sY1y8Q2FzQxQ==`
+
 ## Connection Settings
 
 Both probes connect to ActiveMQ broker with the following default settings:

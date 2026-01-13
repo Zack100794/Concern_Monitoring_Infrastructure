@@ -46,6 +46,7 @@ public class ConcernUnencryptedProbe extends ConcernAbstractProbe {
 						"it.cnr.isti.labsedc.concern,java.lang,javax.security,java.util",
 						"vera", "griselda"));
 		//sending events
+		Random timeSlot = new Random();
 		while (true) {
 		try {
 			DebugMessages.line();
@@ -56,8 +57,7 @@ public class ConcernUnencryptedProbe extends ConcernAbstractProbe {
 			while (csvReader.hasNext()) {
                 unencryptedValue = csvReader.next();
 			
-				sendUnencryptedEventMessage(aGenericProbe, unencryptedValue.toString(), "none");
-				Random timeSlot = new Random();
+				sendUnencryptedEventMessage(aGenericProbe, unencryptedValue, "none");
 				
 				Thread.sleep(timeSlot.nextInt(1,40));
 

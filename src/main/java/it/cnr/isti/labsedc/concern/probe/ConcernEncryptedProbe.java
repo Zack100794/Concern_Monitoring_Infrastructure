@@ -48,6 +48,7 @@ public class ConcernEncryptedProbe extends ConcernAbstractProbe {
 						"it.cnr.isti.labsedc.concern,java.lang,javax.security,java.util",
 						"vera", "griselda"));
 		//sending events
+		Random timeSlot = new Random();
 		while (true) {
 		try {
 			DebugMessages.line();
@@ -59,11 +60,10 @@ public class ConcernEncryptedProbe extends ConcernAbstractProbe {
                 payloadToEncrypt = csvReader.next();
 			
 				try {
-					sendEncryptedEventMessage(aGenericProbe, payloadToEncrypt.toString(), "AES");
+					sendEncryptedEventMessage(aGenericProbe, payloadToEncrypt, "AES");
 				} catch (NoSuchAlgorithmException e) {
 					e.printStackTrace();
 				}
-				Random timeSlot = new Random();
 				
 				Thread.sleep(timeSlot.nextInt(1,40));
 
